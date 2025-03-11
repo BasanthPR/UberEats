@@ -1,0 +1,180 @@
+/* Basic Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  height: 60px;
+  padding: 0 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* hidden by default */
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 2000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  float: right;
+  cursor: pointer;
+}
+
+.sidebar-content {
+  margin-top: 60px;
+}
+
+.sidebar-button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+/* HERO SECTION */
+.hero-section {
+  position: relative;
+  height: calc(100vh - 60px); /* full height minus nav bar */
+  background: url('../assets/hero-bg.jpg') center center/cover no-repeat; 
+}
+
+/* Optional dark overlay to improve contrast */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3); /* Increase if text is still not visible */
+  z-index: 0;
+}
+
+/* Content above the overlay */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* White text for heading */
+.hero-content h1 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  /* Optionally add a background behind text if it's still hard to read */
+  /* background-color: rgba(0,0,0,0.5);
+     padding: 10px;
+     border-radius: 4px; */
+}
+
+/* Single-row layout for input, dropdown, and button */
+.input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-group input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  outline: none;
+}
+
+/* Delivery Option Button (e.g. "Deliver now") */
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-btn {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff; 
+  color: #000;
+  cursor: pointer;
+}
+
+/* Dropdown Options */
+.dropdown-options {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  width: 150px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.dropdown-options div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-options div:hover {
+  background-color: #f5f5f5;
+}
+
+/* Search Button */
+.search-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.search-btn:hover {
+  opacity: 0.9;
+}

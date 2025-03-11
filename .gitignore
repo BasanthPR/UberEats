@@ -1,0 +1,72 @@
+# Node.js (Frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+*.tgz
+dist/
+build/
+public/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS and IDE related
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Package distribution
+*.tgz
+
+# Frontend build directories
+/build/
+public/
+
+# Backend (Node.js)
+# Dependencies
+node_modules/
+# Logs
+*.log
+npm-debug.log*
+# Environment variables
+.env
+# Application-specific files
+/dist/
+*.pid
+*.seed
+
+# Backend (Java, Python, etc.)
+*.class
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+*.idea/
+
+# Database
+*.sqlite
+*.db
+
+# Maven
+target/
+*.jar
+*.war
+
+# Gradle
+.gradle/
+build/
+
+# Docker
+.docker/
+docker-compose.override.yml
+

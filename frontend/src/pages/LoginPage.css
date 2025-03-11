@@ -1,0 +1,19 @@
+/* src/pages/LoginPage.css */
+
+/* Full-height container */
+.login-container {
+    min-height: 100vh;
+  }
+  
+  /* Header */
+  .login-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* White box in center */
+  .login-box {
+    width: 100%;
+    max-width: 360px; /* adjust as needed */
+  }
+  
