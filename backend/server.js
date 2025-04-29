@@ -6,6 +6,17 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const path = require('path');
+const fs = require('fs');
+
+// Create logs directory if it doesn't exist
+const logsDir = path.join(__dirname, 'logs');
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir, { recursive: true });
+}
+
+// Initialize Kafka real-time log (for debugging)
+const realtimeLogPath = path.join(logsDir, 'kafka-realtime.log');
+fs.writeFileSync(realtimeLogPath, `=== KAFKA REALTIME MESSAGE LOG ===\nStarted at: ${new Date().toISOString()}\n\n`);
 
 // MongoDB connection
 const { connectDB } = require('./config/db');
@@ -23,8 +34,8 @@ const { startAllConsumers } = require('./services/kafkaConsumers');
     
     if (kafkaConnected) {
       console.log('Kafka connections established, starting consumers...');
-    await startAllConsumers();
-    console.log('Kafka setup complete');
+      await startAllConsumers();
+      console.log('Kafka setup complete');
     } else {
       console.error('Failed to connect to Kafka, consumers not started');
     }
@@ -77,7 +88,19 @@ app.use('/restaurant', restaurantRoutes);
 app.use('/dishes', dishRoutes);
 app.use('/orders', orderRoutes);
 
+// Endpoint to view Kafka logs (for debugging)
+app.get('/debug/kafka-logs', (req, res) => {
+  try {
+    const logContent = fs.readFileSync(realtimeLogPath, 'utf-8');
+    res.setHeader('Content-Type', 'text/plain');
+    res.send(logContent);
+  } catch (error) {
+    res.status(500).send('Error reading log file');
+  }
+});
+
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
+  console.log(`Kafka real-time logs available at: http://localhost:${PORT}/debug/kafka-logs`);
 });

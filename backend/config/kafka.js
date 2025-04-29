@@ -1,6 +1,7 @@
 const { Kafka } = require('kafkajs');
 const fs = require('fs');
 const path = require('path');
+const { initRealtimeLog, logRealtimeMessage } = require('../utils/kafkaRealTimeLogger');
 
 // Create logs directory if it doesn't exist
 const logsDir = path.join(__dirname, '../logs');
@@ -11,8 +12,9 @@ if (!fs.existsSync(logsDir)) {
 // Create log file path
 const kafkaLogFile = path.join(logsDir, 'kafka-messages.log');
 
-// Initialize log file with header
+// Initialize log files with headers
 fs.writeFileSync(kafkaLogFile, `=== KAFKA MESSAGE FLOW LOG ===\nStarted at: ${new Date().toISOString()}\n\n`);
+initRealtimeLog(); // Initialize real-time log file
 
 // Initialize Kafka client
 const kafka = new Kafka({
@@ -47,8 +49,8 @@ const logKafkaMessage = (type, topic, message) => {
   // Log to file
   fs.appendFileSync(kafkaLogFile, logEntry);
   
-  // Log to console
-  console.log(`KAFKA ${type}: ${topic}`, JSON.stringify(message));
+  // Also log to real-time log file
+  logRealtimeMessage(type, topic, message);
 };
 
 // Connect all Kafka clients
